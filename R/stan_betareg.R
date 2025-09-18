@@ -190,7 +190,7 @@ stan_betareg <-
             x = X, y = Y, z = Z %ORifNULL% model.matrix(y ~ 1),
             family = beta_fam(link), family_phi = beta_phi_fam(link_phi),
             formula, model = mf, terms = mt, call = match.call(),
-            na.action = attr(mf, "na.action"), contrasts = attr(X, "contrasts"), 
+            na.action = attr(mf, "na.action"), contrasts = br$contrasts, 
             stan_function = "stan_betareg")
     out <- stanreg(fit)
     if (algorithm == "optimizing") {
