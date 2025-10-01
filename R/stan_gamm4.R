@@ -424,9 +424,9 @@ plot_nonlinear <- function(x, smooths, ...,
   ggplot(plot_data, aes(x = predictor)) + 
     geom_ribbon(aes(ymin = lower, ymax = upper), 
                 fill = scheme[[1]], color = scheme[[2]],
-                alpha = alpha, size = size) + 
+                alpha = alpha, linewidth = size) + 
     geom_line(aes(y = middle), color = scheme[[5]], 
-              size = 0.75 * size, lineend = "round") + 
+              linewidth = 0.75 * size, lineend = "round") + 
     labs(y = NULL) + 
     do.call(facet_wrap, facet_args) + 
     bayesplot::theme_default()
