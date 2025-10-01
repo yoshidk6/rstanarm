@@ -405,7 +405,7 @@
 #'     besselK(abs(x) / scale ^ 2, nu = 0) / (scale ^ 2 * pi)
 #'   }
 #'   stat_dist <- function(dist, ...) {
-#'     ggplot2::stat_function(ggplot2::aes_(color = dist), ...)
+#'     ggplot2::stat_function(ggplot2::aes(color = .env$dist), ...)
 #'   }
 #'   ggplot2::ggplot(data.frame(x = xlim), ggplot2::aes(x)) + 
 #'     stat_dist("normal", size = .75, fun = dnorm, 
