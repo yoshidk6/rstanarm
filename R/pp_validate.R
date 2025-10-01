@@ -191,9 +191,9 @@ pp_validate <- function(object, nreps = 20, seed = 12345, ...) {
   plotdata <- data.frame(x = z_batch, y = params_batch)
 
   scheme <- bayesplot::color_scheme_get()
-  ggplot(plotdata, aes_string(x = "x", y = "y")) +
+  ggplot(plotdata, aes(x = x, y = y)) +
     geom_segment(
-      aes_string(x = "0", xend = "x", y = "y", yend = "y"),
+      aes(x = 0, xend = x, y = y, yend = y),
       color = scheme[["mid"]],
       size = rel(1)
     ) +

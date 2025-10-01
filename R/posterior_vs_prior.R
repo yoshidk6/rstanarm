@@ -91,7 +91,7 @@
 #' gg_polr + ggplot2::coord_flip()
 #' }
 #' }
-#' @importFrom ggplot2 geom_pointrange facet_wrap aes_string labs
+#' @importFrom ggplot2 geom_pointrange facet_wrap labs
 #'   scale_x_discrete element_line element_text
 #' 
 posterior_vs_prior <- function(object, ...) {
@@ -127,15 +127,22 @@ posterior_vs_prior.stanreg <-
       group_by <- "model"
       xvar <- "parameter"
     }
-    aes_args <-
-      list(
-        x = xvar,
-        y = "estimate",
-        ymin = "lb",
-        ymax = "ub"
+    if (is.na(color_by)) {
+      mapping <- aes(
+        x = .data[[xvar]],
+        y = .data[["estimate"]],
+        ymin = .data[["lb"]],
+        ymax = .data[["ub"]]
       )
-    if (!is.na(color_by))
-      aes_args$color <- color_by
+    } else {
+      mapping <- aes(
+        x = .data[[xvar]],
+        y = .data[["estimate"]],
+        ymin = .data[["lb"]],
+        ymax = .data[["ub"]],
+        color = .data[[color_by]]
+      )
+    }
     if (!length(facet_args)) {
       facet_args <- list(facets = group_by)
     } else {
@@ -160,7 +167,7 @@ posterior_vs_prior.stanreg <-
                       regex_pars = regex_pars)
     
     graph <-
-      ggplot(plot_data, mapping = do.call("aes_string", aes_args)) +
+      ggplot(plot_data, mapping = mapping) +
       geom_pointrange(...) +
       do.call("facet_wrap", facet_args) +
       theme_default() +

@@ -270,6 +270,10 @@ br <- stan_gamm4(y ~ s(x0) + x1 + s(x2), data = dat, random = ~ (1 | fac),
 print(br)
 plot_nonlinear(br)
 plot_nonlinear(br, smooths = "s(x0)", alpha = 2/3)
+
+br2 <- stan_gamm4(y ~ s(x0, x2) + x1, data = dat, random = ~ (1 | fac), 
+                 chains = 1, iter = 500) # for example speed
+plot_nonlinear(br2)
 }
 }
 }
